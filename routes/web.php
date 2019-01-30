@@ -8,6 +8,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Post Routes
+Route::get('/post/list','PostsController@index')->middleware('auth')->name('post.list');
+Route::get('/post/show/{post_id}','PostsController@show')->middleware('auth')->name('post.show');
+Route::get('/post/create','PostsController@create')->middleware('auth','isAdmin')->name('post.create');
+Route::post('/post/create','PostsController@store')->middleware('auth','isAdmin')->name('post.store');
+Route::get('/post/edit/{post_id}','PostsController@edit')->middleware('auth','isAdmin')->name('post.edit');
+Route::post('/post/edit/{post_id}','PostsController@update')->middleware('auth','isAdmin')->name('post.update');
+Route::get('/post/delete/{post_id}','PostsController@destroy')->middleware('auth','isAdmin')->name('post.delete');
+
 // User Routes
 Route::get('/user/list','UsersController@index')->middleware('auth','isAdmin')->name('user.list');
 Route::get('/user/create','UsersController@create')->middleware('auth','isAdmin')->name('user.create');

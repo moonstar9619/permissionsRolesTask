@@ -47,6 +47,33 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        @hasrole('Admin|Writer')
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false" aria-haspopup="true" v-pre>
+                                Posts <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+                                @if(auth()->user()->can('Create Post') || auth()->user()->can('Administer roles & permissions'))
+                                    <li>
+                                        <a href="{{ route('post.create') }}">
+                                            Create new post
+                                        </a>
+                                    </li>
+                                @else
+                                    <li style="margin-left: 14px">
+                                        Create new post
+                                    </li>
+                                @endif
+                                <li>
+                                    <a href="{{ route('post.list') }}">
+                                        List of post
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endhasrole
                         @hasrole('Admin')
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
