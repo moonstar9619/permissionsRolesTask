@@ -9,12 +9,14 @@
         <form action="" method="post">
             {{ csrf_field() }}
             <a href="{{ url()->previous() }}" class="btn btn-warning">Back</a>
-            @can('Edit Post')
+            {{--@can('Create Post')--}}
+            @if(auth()->user()->can('Create Post') || auth()->user()->can('AllPermission'))
                 <a href="" class="btn btn-info">Edit</a>
-            @endcan
-            @can('Delete Post')
+            @endif
+            {{--@endcan--}}
+            @if(auth()->user()->can('Delete Post') || auth()->user()->can('AllPermission'))
                 <input type="submit" value="Delete" class="btn btn-danger">
-            @endcan
+            @endif
         </form>
     </div>
 @endsection

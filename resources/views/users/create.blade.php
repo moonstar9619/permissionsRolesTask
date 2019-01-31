@@ -14,12 +14,23 @@
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="form-control"/>
             </div>
+            <hr>
+            <h5><b>Assign Roles</b></h5>
             <div class="form-group">
                 @foreach($roles as $role)
                     <input type="checkbox" name="roles[]" value="{{ $role->id }}">
                     <label>{{ $role->name }}</label>
                 @endforeach
             </div>
+            <hr>
+            <h5><b>Assign Permissions</b></h5>
+            <div class="form-group">
+                @foreach($permissions as $permission)
+                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                    <label>{{ $permission->name }}</label>
+                @endforeach
+            </div>
+            <hr>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control"/>
@@ -28,6 +39,7 @@
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"/>
             </div>
+
             <input type="submit" value="Add New User" class="btn btn-success"/>
         </form>
     </div>

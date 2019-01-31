@@ -22,14 +22,14 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>
                         <td>
-                            @if(auth()->user()->can('Edit User') || auth()->user()->can('Administer roles & permissions'))
+{{--                            @if(auth()->user()->can('Edit User') || auth()->user()->can('AllPermission'))--}}
                                 <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info pull-left"
                                    style="margin-right: 3px;">Edit</a>
-                            @endif
-                                @if(auth()->user()->can('Delete User') || auth()->user()->can('Administer roles & permissions'))
+                            {{--@endif--}}
+                            @if(auth()->user()->can('Delete User') || auth()->user()->can('AllPermission'))
                                 <a href="{{ route('user.delete',$user->id) }}"
                                    class="btn btn-danger pull-left">Delete</a>
-                                @endif
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -37,6 +37,8 @@
             </table>
         </div>
 
-        <a href="{{ route('user.create') }}" class="btn btn-success">Add User</a>
+        @if( auth()->user()->can('Create User')|| auth()->user()->can('AllPermission'))
+            <a href="{{ route('user.create') }}" class="btn btn-success">Add User</a>
+        @endif
     </div>
 @endsection

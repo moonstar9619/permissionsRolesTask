@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ChackPermissionMiddleware;
 use App\Http\Middleware\CheckRoleMiddleware;
 use App\Http\Middleware\ClearanceMiddleware;
 use App\Http\Middleware\EditorMiddleware;
@@ -61,7 +62,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'isAdmin'=>AdminMiddleware::class,
-        'role'=>CheckRoleMiddleware::class,
+        'permission'=>ChackPermissionMiddleware::class,
     ];
 }

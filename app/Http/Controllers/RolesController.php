@@ -49,8 +49,9 @@ class RolesController extends Controller
 
     public function update(Request $request, $role_id)
     {
+//        dd($request['permissions']);
         $this->validate($request,[
-            'name'=>'required|max:10|unique:roles,name,'
+            'name'=>'required|max:10'
         ]);
         $role = Role::find($role_id);
         $input = $request->except(['permissions']);

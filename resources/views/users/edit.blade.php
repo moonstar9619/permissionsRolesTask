@@ -17,9 +17,8 @@
                 <input type="email" name="email" class="form-control"
                        value="{{ old('email',$user->email) }}"/>
             </div>
-            <h5>
-                <b>Give Role</b>
-            </h5>
+            <hr>
+            <h5><b>Assign Roles</b></h5>
             <div class="form-group">
                 @foreach($roles as $role)
                     <input type="checkbox" name="roles[]" value="{{ $role->id }}"
@@ -27,6 +26,16 @@
                     <label>{{ $role->name }}</label>
                 @endforeach
             </div>
+            <hr>
+            <h5><b>Assign Permissions</b></h5>
+            <div class="form-group">
+                @foreach($permissions as $permission)
+                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                            {{ in_array($permission->name,$userPermissions) ? 'checked':'' }} />
+                    <label>{{ $permission->name }}</label>
+                @endforeach
+            </div>
+            <hr>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control"/>

@@ -18,11 +18,11 @@
                     <tr>
                         <td>{{ $permission->name }}</td>
                         <td>
-                            @if(auth()->user()->can('Edit Permissions & roles') || auth()->user()->can('Administer roles & permissions'))
+                            @if(auth()->user()->can('Edit Permission') || auth()->user()->can('AllPermission'))
                                 <a href="{{ route('permission.edit',$permission->id) }}" class="btn btn-info pull-left"
                                    style="margin-right: 3px;">Edit</a>
                             @endif
-                            @if(auth()->user()->can('Edit Permissions & roles') || auth()->user()->can('Administer roles & permissions'))
+                            @if(auth()->user()->can('Delete Permission') || auth()->user()->can('AllPermission'))
                                 <a href="{{ route('permission.delete',$permission->id) }}"
                                    class="btn btn-danger pull-left"
                                    style="margin-right: 3px;">Delete</a>
@@ -33,7 +33,7 @@
                 </tbody>
             </table>
         </div>
-        @if(! auth()->user()->can('Create Permissions & roles')||! auth()->user()->can('Create Permissions & roles'))
+        @if( auth()->user()->can('Create Permission')|| auth()->user()->can('AllPermission'))
             <a href="{{ route('permission.create') }}" class="btn btn-success">Add Permission</a>
         @endif
     </div>

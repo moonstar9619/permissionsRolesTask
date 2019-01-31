@@ -6,6 +6,7 @@
         </h1>
         <hr>
         <form action="" method="post">
+            {{ csrf_field() }}
             <div class="from-group">
                 <label for="name">Role Name</label>
                 <input type="text" name="name" id="name" class="form-control"
@@ -13,7 +14,7 @@
             </div>
             <h5><b>Assign Permissions</b></h5>
             @foreach($permissions as $permission)
-                <input type="checkbox" name="pemissions[]" value="{{ $permission->id }}"
+                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
                         {{ in_array($permission->name,$rolePermissions) ? 'checked':'' }}>
                 <label>{{ $permission->name }}</label>
             @endforeach

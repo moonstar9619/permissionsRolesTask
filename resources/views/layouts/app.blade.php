@@ -47,110 +47,139 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        @hasrole('Admin|Writer')
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false" aria-haspopup="true" v-pre>
-                                Posts <span class="caret"></span>
-                            </a>
+                        @if(auth()->user()->can('Create Post') || auth()->user()->can('Edit Post') || auth()->user()->can('Delete Post') || auth()->user()->can('AllPermission'))
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Posts <span class="caret"></span>
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                @if(auth()->user()->can('Create Post') || auth()->user()->can('Administer roles & permissions'))
-                                    <li>
-                                        <a href="{{ route('post.create') }}">
+                                <ul class="dropdown-menu">
+                                    @if(auth()->user()->can('Create Post')|| auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('post.create') }}">
+                                                Create new post
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 14px">
                                             Create new post
-                                        </a>
-                                    </li>
-                                @else
-                                    <li style="margin-left: 14px">
-                                        Create new post
-                                    </li>
-                                @endif
-                                <li>
-                                    <a href="{{ route('post.list') }}">
-                                        List of post
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endhasrole
-                        @hasrole('Admin')
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false" aria-haspopup="true" v-pre>
-                                Users <span class="caret"></span>
-                            </a>
+                                        </li>
+                                    @endif
+                                    @if(auth()->user()->can('Edit Post') ||auth()->user()->can('Delete Post') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('post.list') }}">
+                                                List of post
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 14px">
+                                            List of post
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(auth()->user()->can('Create User') || auth()->user()->can('Delete User') || auth()->user()->can('Edit User') || auth()->user()->can('AllPermission'))
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Users <span class="caret"></span>
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                @if(auth()->user()->can('Create Ueser') || auth()->user()->can('Administer roles & permissions'))
-                                <li>
-                                    <a href="{{ route('user.create') }}">
-                                        Create new user
-                                    </a>
-                                </li>
-                                @else
-                                    <li style="margin-left: 14px">
+                                <ul class="dropdown-menu">
+                                    @if(auth()->user()->can('Create Ueser') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('user.create') }}">
+                                                Create new user
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 14px">
                                             Create new user
-                                    </li>
-                                @endif
-                                <li>
-                                    <a href="{{ route('user.list') }}">
-                                        List of users
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endhasrole
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false" aria-haspopup="true" v-pre>
-                                Permissions <span class="caret"></span>
-                            </a>
+                                        </li>
+                                    @endif
+                                    @if(auth()->user()->can('Edit User') ||auth()->user()->can('Delete User') || auth()->user()->can('AllPermission'))
 
-                            <ul class="dropdown-menu">
-                                @hasrole('Admin')
-                                <li>
-                                    <a href="{{ route('permission.create') }}">
-                                        Create new permission
-                                    </a>
-                                </li>
-                                @else
-                                    <li style="margin-left: 4px">
-                                        Create new permission
-                                    </li>
-                                    @endhasrole
-                                    <li>
-                                        <a href="{{ route('permission.list') }}">
+                                        <li>
+                                            <a href="{{ route('user.list') }}">
+                                                List of users
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 14px">
+                                            List of users
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(auth()->user()->can('Create Permission') || auth()->user()->can('Edit Permission') || auth()->user()->can('Delete Permission') || auth()->user()->can('AllPermission'))
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Permissions <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    @if(auth()->user()->can('Create Permission') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('permission.create') }}">
+                                                Create new permission
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 4px">
+                                            Create new permission
+                                        </li>
+                                    @endif
+                                    @if(auth()->user()->can('Edit Permission') ||auth()->user()->can('Delete Permission') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('permission.list') }}">
+                                                List of permissions
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 4px">
                                             List of permissions
-                                        </a>
-                                    </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false" aria-haspopup="true" v-pre>
-                                Roles <span class="caret"></span>
-                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
+                        @if(auth()->user()->can('Create Role') || auth()->user()->can('Edit Role') || auth()->user()->can('Delete Role') || auth()->user()->can('AllPermission'))
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Roles <span class="caret"></span>
+                                </a>
 
-                            <ul class="dropdown-menu">
-                                @hasrole('Admin')
-                                <li>
-                                    <a href="{{ route('role.create') }}">
-                                        Create new role
-                                    </a>
-                                </li>
-                                @else
-                                <li style="margin-left: 16px">
-                                        Create new role
-                                </li>
-                                @endhasrole
-                                <li>
-                                    <a href="{{ route('role.list') }}">
-                                        List of roles
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                                <ul class="dropdown-menu">
+                                    @if(auth()->user()->can('Create Role') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('role.create') }}">
+                                                Create new role
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 16px">
+                                            Create new role
+                                        </li>
+                                    @endif
+                                    @if(auth()->user()->can('Edit Role') ||auth()->user()->can('Delete Role') || auth()->user()->can('AllPermission'))
+                                        <li>
+                                            <a href="{{ route('role.list') }}">
+                                                List of roles
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li style="margin-left: 16px">
+                                            List of roles
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false" aria-haspopup="true" v-pre>
